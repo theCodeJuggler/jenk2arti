@@ -14,9 +14,7 @@ node {
    }
    stage('Pushing to Artifactory'){
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'Artifactory', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-         
-         sh "echo User - $USERNAME"
-         sh "echo Pass - $PASSWORD"
+
          sh"curl -X PUT -u $USERNAME:$PASSWORD -T ${workspace}/target/BalanceSheetApp-0.0.1-SNAPSHOT.jar 'http://ec2-54-201-29-152.us-west-2.compute.amazonaws.com:8081/artifactory/libs-release-local/ab/Balance.jar'"
       }
    }
